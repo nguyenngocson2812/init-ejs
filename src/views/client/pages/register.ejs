@@ -1,0 +1,148 @@
+<div class="font-sans antialiased bg-grey-lightest">
+    <!-- Top Nav -->
+    <div class="w-full bg-green fixed shadow z-1">
+        <div class="container mx-auto">
+            <div class="w-full flex justify-between items-center py-4 px-8">
+                <!-- Brand -->
+                <div class="text-center text-white font-bold">Your Company</div>
+                <!-- Navigation -->
+                <div class="items-center hidden sm:flex">
+                    <a href="#" class="text-white hover:text-green-lightest no-underline mx-2 px-2 py-2">Link 1</a>
+                    <a href="#" class="text-white hover:text-green-lightest no-underline mx-2 px-2 py-2">Link 2</a>
+                    <a href="#"
+                        class="bg-green-dark hover:bg-green-darker rounded-full text-white no-underline mx-2 px-4 py-2">Link
+                        3</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content -->
+    <div class="w-full bg-grey-lightest" style="padding-top: 4rem;">
+        <div class="container mx-auto py-8">
+            <form action="" class="form-register">
+                <div class="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow">
+                    <div class="py-4 px-8 text-black text-xl border-b border-grey-lighter">Register for a free account
+                    </div>
+                    <div class="py-4 px-8">
+                        <div class="flex mb-4">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-grey-darker text-sm font-bold mb-2" for="email">Email
+                                Address</label>
+                            <input value="sonvipkl04@gmail.com"
+                                class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email"
+                                type="email" placeholder="Your email address">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-grey-darker text-sm font-bold mb-2" for="password">Password</label>
+                            <input value="abcd" class="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+                                id="password" type="password" placeholder="Your secure password">
+                        </div>
+                        <div class="flex items-center justify-between mt-8">
+                            <button type="submit">
+                                Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const form = document.querySelector('.form-register');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = form.email.value;
+        const password = form.password.value;
+
+        try {
+            const res = await fetch("/users/register", {
+                method: "POST",
+                body: JSON.stringify({
+                    email, password
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                console.log(data);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    })
+
+
+</script>
+
+<!-- <script>
+    const checkTokenAndRedirect = async () => {
+        try {
+            const jwtToken = localStorage.getItem('jwtToken');
+            const username = localStorage.getItem('username');
+
+            if (jwtToken && username) {
+                const introspectRequest = {
+                    token: jwtToken
+                };
+                const res = await fetch('/auth/introspect', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(introspectRequest)
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    console.log(data);
+                    if (data.code === 200 && data.result && data.result.valid === true) {
+                        window.location.href = '/home';
+                    }
+                }
+            }
+        }
+        catch (error) {
+            console.log({ error });
+        }
+    };
+    checkTokenAndRedirect();
+
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        try {
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
+
+            const authenticationRequest = {
+                username,
+                password
+            };
+
+            const res = await fetch("/auth/token", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(authenticationRequest)
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.code === 200 && data.result) {
+                    localStorage.setItem('jwtToken', data.result.token);
+                    localStorage.setItem('username', username);
+
+                    window.location.href = '/home';
+                }
+            }
+        }
+        catch (error) {
+            console.log({ error });
+        }
+    });
+</script> -->

@@ -1,0 +1,19 @@
+<div class="p-5">
+    <form action="/admin/users/add" method="post">
+        <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+        </div>
+        <div class="p-3">
+            <select name="status" id="" class="form-control">
+                <option value="1">active</option>
+                <option value="0">inactive</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
